@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .student-photo {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .student-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .student-info {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Students List</h1>
+        <a href="/students/create" class="btn btn-success mb-3">Create Student</a>
+        <ul class="list-group">
+            <% students.forEach(student => { %>
+                <li class="list-group-item student-item">
+                    <div class="student-info">
+                        <img src="<%= student.photo %>" alt="Student Photo" class="student-photo">
+                        <a href="/students/<%= student._id %>"><%= student.name %></a>
+                    </div>
+                    <div>
+                        <a href="/students/<%= student._id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="/students/<%= student._id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
